@@ -28,16 +28,7 @@ def get_new_operations(quantity):
     return list_of_operations[quantity]
 
 
-def info_about_operation(operation):
-    """
-    Функция которая по операции готовит вывод информации
-    :param operation: словарь с данными по операции
-    :return: строка в читаемом виде
-    """
-    pass
 
-
-#  (не забыть пустую строку после)
 
 
 def get_date_of_operation(operation):
@@ -53,6 +44,9 @@ def get_date_of_operation(operation):
         return date_time_obj.strftime("%d.%m.%Y")
     else:
         return 'Дата не указана'
+
+
+
 
 
 def get_encrypted_from_number(operation):
@@ -99,3 +93,32 @@ def get_encrypted_to_number(operation):
         return encrypted_from_info
     else:
         return 'Назначение не указано'
+
+
+def info_about_operation(operation):
+    """
+    Функция которая по операции готовит вывод информации
+    :param operation: словарь с данными по операции
+    :return: строка в читаемом виде
+    """
+    operation_decription = operation.get('description') if operation.get('description') else "Нет описания перевода"
+
+    operation_operationAmount = operation.get('operationAmount')
+    if operation_operationAmount:
+        operation_operationAmount_amount = operation_operationAmount.get('amount') if operation_operationAmount.get('amount') else "Сумма не указана"
+
+        operation_operationAmount_currency = operation_operationAmount.get("currency")
+        if operation_operationAmount_currency:
+            operation_operationAmount_currency_name = operation_operationAmount_currency.get("name") if operation_operationAmount_currency.get("name") else "Валюта не указана"
+        else:
+            operation_operationAmount_currency_name = "Валюта не указана"
+    else:
+        operation_operationAmount_amount = "Сумма не указана"
+        operation_operationAmount_currency_name = "Валюта не указана"
+
+    info_str = (get_date_of_operation(operation) + ' ' + operation_decription + '\n' +
+                get_encrypted_from_number(operation) + ' -> ' + get_encrypted_to_number(operation) + '\n' +
+                operation_operationAmount_amount + ' ' + operation_operationAmount_currency_name + '\n')
+
+    return info_str
+
