@@ -55,25 +55,25 @@ def get_date_of_operation(operation):
         return 'Дата не указана'
 
 
-def get_encrypted_card_number(operation):
+def get_encrypted_from_number(operation):
     """
     Делает по номеру карты из операции шифрованный номер для вывода
     :param operation:
     :return:
     """
-    card_info = operation.get('from')
+    from_info = operation.get('from')
 
-    if card_info:
-        if card_info[0:4] == 'Счет':
-            encrypted_card_info = ('Счет **' + card_info[-4:])
+    if from_info:
+        if from_info[0:4] == 'Счет':
+            encrypted_from_info = ('Счет **' + from_info[-4:])
         else:
-            encrypted_card_info = (card_info[0:-16] +
-                                   card_info[-16:-12] + ' ' +
-                                   card_info[-12:-10] + '**' + ' ' +
+            encrypted_from_info = (from_info[0:-16] +
+                                   from_info[-16:-12] + ' ' +
+                                   from_info[-12:-10] + '**' + ' ' +
                                    '****' +
-                                   card_info[-4:])
+                                   from_info[-4:])
 
-        return encrypted_card_info
+        return encrypted_from_info
     else:
         return 'Источник не указан'
 
