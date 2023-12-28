@@ -34,29 +34,29 @@ def get_executed_operations(operations):
 
 
 
+def sort_operations_by_date(operations):
+    """
+    Функция сортирует по дате полученный массив операций
+    :param operations:
+    :return:
+    """
+    sorted_operations = sorted(operations, key=lambda x: x['date'], reverse=True)
+
+    return sorted_operations
 
 def get_new_operations(filename, quantity):
     """
-    По списку операций выводит последние quantity операций
-    :param list:
-    :param quantity:
+    Берет список операций из файла, удаляет не исполненные операции, сортирует оставшиеся операции по дате и выводит quantity последних операций
+    :param filename: название файла откуда берем данные
+    :param quantity: количество операций, которые надо вывести
     :return:
     """
     list_of_operations = get_operations_from_json(filename)
-
     executed_operations = get_executed_operations(list_of_operations)
+    s_sorted = sort_operations_by_date(executed_operations)
 
-    executed_operations.sort(key=lambda x: x.get["date"], reverse=True)
+    return s_sorted[0:quantity]
 
-    # sorted(list_of_operations, key=get_data_for_sort)
-    # sorted(list_of_operations, key=operator.itemgetter("date"))
-    # sorted_list_of_operations = sorted(list_of_operations, key=lambda x: x["state"])
-
-    # sorted_list_of_operations = list_of_operations.sort(key=lambda dictionary: dictionary['state'])
-
-    # list_of_operations.sort(key=get_date)
-
-    # return executed_operations[0:quantity]
 
 # print(get_new_operations('operations.json', 2))
 
