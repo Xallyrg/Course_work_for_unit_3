@@ -1,4 +1,5 @@
 import json
+import datetime
 
 
 def get_operations_from_json(filename):
@@ -15,14 +16,16 @@ def get_operations_from_json(filename):
         return list_of_operations
 
 
-def get_new_operations(list, quantity):
+def get_new_operations(quantity):
     """
     По списку операций выводит последние quantity операций
     :param list:
     :param quantity:
     :return:
     """
-    pass
+    list_of_operations = get_operations_from_json('operations.json')
+
+    return list_of_operations[quantity]
 
 
 def info_about_operation(operation):
@@ -40,10 +43,13 @@ def info_about_operation(operation):
 def get_date_of_operation(operation):
     """
     Преращает дату из операции в вид ДД.ММ.ГГГГ
-    :param operation:
-    :return:
+    :param operation: операция
+    :return: дата операции в нужном формате
     """
-    pass
+    date_time_obj = datetime.datetime.strptime(operation['date'], "%Y-%m-%dT%H:%M:%S.%f")
+
+    return date_time_obj.strftime("%d.%m.%Y")
+
 
 
 def get_encrypted_card_number(operation):
