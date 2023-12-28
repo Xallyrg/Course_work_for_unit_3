@@ -1,5 +1,6 @@
 import json
 import datetime
+import operator
 
 
 def get_operations_from_json(filename):
@@ -16,18 +17,48 @@ def get_operations_from_json(filename):
         return list_of_operations
 
 
-def get_new_operations(quantity):
+
+def get_executed_operations(operations):
+    """
+    Функция оставляет только совершенные операции, из списка всех операций
+    :param operations:
+    :return:
+    """
+    operation_list = []
+    for operation in operations:
+        if operation.get('state') == 'EXECUTED':
+            operation_list.append(operation)
+    return operation_list
+
+# print(get_executed_operations(get_operations_from_json('operations.json')))
+
+
+
+
+def get_new_operations(filename, quantity):
     """
     По списку операций выводит последние quantity операций
     :param list:
     :param quantity:
     :return:
     """
-    list_of_operations = get_operations_from_json('operations.json')
+    list_of_operations = get_operations_from_json(filename)
 
-    return list_of_operations[quantity]
+    executed_operations = get_executed_operations(list_of_operations)
 
+    executed_operations.sort(key=lambda x: x.get["date"], reverse=True)
 
+    # sorted(list_of_operations, key=get_data_for_sort)
+    # sorted(list_of_operations, key=operator.itemgetter("date"))
+    # sorted_list_of_operations = sorted(list_of_operations, key=lambda x: x["state"])
+
+    # sorted_list_of_operations = list_of_operations.sort(key=lambda dictionary: dictionary['state'])
+
+    # list_of_operations.sort(key=get_date)
+
+    # return executed_operations[0:quantity]
+
+# print(get_new_operations('operations.json', 2))
 
 
 
