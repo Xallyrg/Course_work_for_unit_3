@@ -78,10 +78,24 @@ def get_encrypted_from_number(operation):
         return 'Источник не указан'
 
 
-def get_encrypted_account_number(operation):
+def get_encrypted_to_number(operation):
     """
     Делает по номеру счета из операции шифрованный номер для вывода
     :param operation:
     :return:
     """
-    pass
+    to_info = operation.get('to')
+
+    if to_info:
+        if to_info[0:4] == 'Счет':
+            encrypted_from_info = ('Счет **' + to_info[-4:])
+        else:
+            encrypted_from_info = (to_info[0:-16] +
+                                   to_info[-16:-12] + ' ' +
+                                   to_info[-12:-10] + '**' + ' ' +
+                                   '****' +
+                                   to_info[-4:])
+
+        return encrypted_from_info
+    else:
+        return 'Назначение не указано'
