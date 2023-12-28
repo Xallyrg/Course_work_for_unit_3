@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "course-work-for-unit-3"
+version = "0.1.0"
+description = "SkyPro course work for unit Backend Development Basics"
+authors = ["Oleg Zaslavskii <Zasoleg1995@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
