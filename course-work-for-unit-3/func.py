@@ -46,10 +46,13 @@ def get_date_of_operation(operation):
     :param operation: операция
     :return: дата операции в нужном формате
     """
-    date_time_obj = datetime.datetime.strptime(operation['date'], "%Y-%m-%dT%H:%M:%S.%f")
+    date = operation.get('date')
 
-    return date_time_obj.strftime("%d.%m.%Y")
-
+    if date:
+        date_time_obj = datetime.datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f")
+        return date_time_obj.strftime("%d.%m.%Y")
+    else:
+        return 'Дата не указана'
 
 
 def get_encrypted_card_number(operation):
@@ -58,7 +61,21 @@ def get_encrypted_card_number(operation):
     :param operation:
     :return:
     """
-    pass
+    card_info = operation.get('from')
+
+    if card_info:
+        if card_info[0:4] == 'Счет':
+            encrypted_card_info = ('Счет **' + card_info[-4:])
+        else:
+            encrypted_card_info = (card_info[0:-16] +
+                                   card_info[-16:-12] + ' ' +
+                                   card_info[-12:-10] + '**' + ' ' +
+                                   '****' +
+                                   card_info[-4:])
+
+        return encrypted_card_info
+    else:
+        return 'Источник не указан'
 
 
 def get_encrypted_account_number(operation):
