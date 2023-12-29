@@ -1,6 +1,7 @@
 import json
 import datetime
-import operator
+import os.path
+
 
 
 def get_operations_from_json(filename):
@@ -9,12 +10,15 @@ def get_operations_from_json(filename):
     :param filename: название файла
     :return: список операций
     """
-    with open(f'{filename}', encoding="utf-8") as f:
-        operation_json = f.read()
+    if os.path.exists(filename):
+        with open(f'{filename}', encoding="utf-8") as f:
+            operation_json = f.read()
 
-        list_of_operations = json.loads(operation_json)
+            list_of_operations = json.loads(operation_json)
 
-        return list_of_operations
+            return list_of_operations
+    else:
+        return []
 
 
 def get_executed_operations(operations):
