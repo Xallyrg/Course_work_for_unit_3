@@ -1,0 +1,1 @@
+from course_work_for_unit_3.func  import get_new_operations, info_about_operation
