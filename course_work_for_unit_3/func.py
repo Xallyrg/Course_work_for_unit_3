@@ -89,7 +89,7 @@ def get_encrypted_from_number(operation):
             encrypted_from_info = (from_info[0:-16] +
                                    from_info[-16:-12] + ' ' +
                                    from_info[-12:-10] + '**' + ' ' +
-                                   '****' +
+                                   '****' + ' ' +
                                    from_info[-4:])
 
         return encrypted_from_info
@@ -112,7 +112,7 @@ def get_encrypted_to_number(operation):
             encrypted_from_info = (to_info[0:-16] +
                                    to_info[-16:-12] + ' ' +
                                    to_info[-12:-10] + '**' + ' ' +
-                                   '****' +
+                                   '****' + ' ' +
                                    to_info[-4:])
 
         return encrypted_from_info
