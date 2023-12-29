@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "course-work-for-unit-3"
+name = "course_work_for_unit_3"
 version = "0.1.0"
 description = "SkyPro course work for unit Backend Development Basics"
 authors = ["Oleg Zaslavskii <Zasoleg1995@gmail.com>"]
@@ -11,6 +11,7 @@ python = "^3.12"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.3"
+pytest-cov = "^4.1.0"
 
 [build-system]
 requires = ["poetry-core"]

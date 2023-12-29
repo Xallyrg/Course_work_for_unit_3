@@ -1,6 +1,7 @@
 import json
 import datetime
-import operator
+import os.path
+
 
 
 def get_operations_from_json(filename):
@@ -9,12 +10,15 @@ def get_operations_from_json(filename):
     :param filename: название файла
     :return: список операций
     """
-    with open(f'{filename}', encoding="utf-8") as f:
-        operation_json = f.read()
+    if os.path.exists(filename):
+        with open(f'{filename}', encoding="utf-8") as f:
+            operation_json = f.read()
 
-        list_of_operations = json.loads(operation_json)
+            list_of_operations = json.loads(operation_json)
 
-        return list_of_operations
+            return list_of_operations
+    else:
+        return []
 
 
 def get_executed_operations(operations):
@@ -85,7 +89,7 @@ def get_encrypted_from_number(operation):
             encrypted_from_info = (from_info[0:-16] +
                                    from_info[-16:-12] + ' ' +
                                    from_info[-12:-10] + '**' + ' ' +
-                                   '****' +
+                                   '****' + ' ' +
                                    from_info[-4:])
 
         return encrypted_from_info
@@ -108,7 +112,7 @@ def get_encrypted_to_number(operation):
             encrypted_from_info = (to_info[0:-16] +
                                    to_info[-16:-12] + ' ' +
                                    to_info[-12:-10] + '**' + ' ' +
-                                   '****' +
+                                   '****' + ' ' +
                                    to_info[-4:])
 
         return encrypted_from_info
